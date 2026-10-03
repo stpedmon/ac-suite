@@ -1,4 +1,4 @@
-const C = "ac-suite-v118";
+const C = "ac-suite-v119";
 self.addEventListener("install", e => { e.waitUntil(caches.open(C).then(c => c.add("./")).catch(()=>{})); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil((async () => { for (const k of await caches.keys()) if (k !== C) await caches.delete(k); await self.clients.claim(); })()); });
 self.addEventListener("fetch", e => {
