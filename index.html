@@ -3345,6 +3345,7 @@ function rqBuildDoc(num,cli){
     didParseCell:function(d){ if(d.section==="body"&&d.column.index===2){ const v=String(d.cell.raw||""); if(v.indexOf("EN STOCK")===0){d.cell.styles.textColor=[6,95,70];d.cell.styles.fillColor=[236,253,245];} else if(v.indexOf("PARCIAL")===0){d.cell.styles.textColor=[146,64,14];d.cell.styles.fillColor=[255,247,237];} else {d.cell.styles.textColor=[30,58,138];d.cell.styles.fillColor=[239,246,255];} } }};
   const headRow=["SKU","Pieza","Disponibilidad","Cant.","P. unit.","Total"];
   const grupos=[]; if(gStock.length)grupos.push({t:"EN STOCK EN PANAMA  -  entrega 24 a 48 h habiles",c:[6,95,70],rows:gStock.map(mkRow)}); if(gPed.length)grupos.push({t:"BAJO PEDIDO  -  importacion desde fabrica, 30 a 45 dias habiles",c:[30,58,138],rows:gPed.map(mkRow)});
+  if(!grupos.length)grupos.push({t:"",c:[26,26,26],rows:[]});
   grupos.forEach((g,gi)=>{ if(grupos.length>1){ if(y>H-50){doc.addPage();y=M;} doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.setTextColor(g.c[0],g.c[1],g.c[2]);doc.text(g.t,M,y+3);y+=5; }
     doc.autoTable(Object.assign({head:[headRow],body:g.rows,startY:y},tblOpts)); y=doc.lastAutoTable.finalY+(gi<grupos.length-1?6:0); });
   let fY=doc.lastAutoTable.finalY+5; if(fY>H-70){doc.addPage();fY=M;}
